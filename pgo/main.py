@@ -2,7 +2,7 @@ import os
 import copy
 
 from src.least_squares import GaussNewton
-from src.loader import read_graph_g2o
+from src.loader import read_graph
 from src.visualize import plot_graph
 
 
@@ -12,7 +12,7 @@ SOLVE_LIE = True
 
 
 def main():
-    graph = read_graph_g2o(os.path.join("data", f"input_{DATA_NAME}_g2o.g2o"))
+    graph = read_graph(os.path.join("data", f"input_{DATA_NAME}_g2o.g2o"))
     graphs = [copy.deepcopy(graph)]
     titles = ["Initial graph"]
 

@@ -1,6 +1,7 @@
 # Pose graph optimization
 
-Python implementation of 2D pose graph optimization.
+Python implementation of 2D pose graph optimization. For more information, please refer to my blog:
+- [Lie theory in Robotics](https://dgbshien.com/docs/blogs/lie-theory.pdf)
 
 **Prerequisites**
 ```sh
