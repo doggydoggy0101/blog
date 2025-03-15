@@ -1,0 +1,14 @@
+# vscode
+.vscode
+
+# python
+__pycache__/
+
+# ruff
+.ruff_cache
+
+# venv
+.vevn
+
+# macos
+.DS_Store
