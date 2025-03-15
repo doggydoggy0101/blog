@@ -10,7 +10,7 @@ class Graph:
         self.lut = lut  # look up table for a node's starting index in vector x
 
 
-def read_graph_g2o(file_path):
+def read_graph(file_path):
     nodes = {}
     edges = []
     Edge = namedtuple("Edge", ["fromNode", "toNode", "measurement", "information"])

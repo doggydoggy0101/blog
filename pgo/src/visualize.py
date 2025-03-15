@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 # fmt: off
 try:
     import scienceplots
-    plt.style.use("science")
+    plt.style.use(["science", "ieee"])
 except ImportError:
     pass
 # fmt: on
@@ -21,6 +21,7 @@ NODE_KWARG = {
 }
 EDGE_KWARG = {
     "color": "#95a5a6",
+    "ls": "-",  # linestyle
     "linewidth": 1,
     "zorder": 0,
 }
@@ -65,6 +66,7 @@ def plot_graph(graphs, titles, save_path):
         )
         ax[i].set_xticks([])
         ax[i].set_yticks([])
+        ax[i].set_axis_off()
         ax[i].set_title(titles[i], fontsize=TITLE_FONTSIZE)
 
     fig.tight_layout()

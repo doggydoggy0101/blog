@@ -21,11 +21,11 @@ class GaussNewton:
         pose_i = se2_vec_to_mat(node1)
         pose_j = se2_vec_to_mat(node2)
         pose_ij = se2_vec_to_mat(edge)
-        rel_pose = np.linalg.inv(pose_ij) @ np.linalg.inv(pose_i) @ pose_j
+        err_pose = np.linalg.inv(pose_ij) @ np.linalg.inv(pose_i) @ pose_j
 
         if gradType == "Euclidean":
-            # linearized residual
-            res = se2_mat_to_vec(rel_pose)
+            # linearized error/residual
+            res = se2_mat_to_vec(err_pose)
 
             rot_i = pose_i[:2, :2]
             rot_ij = pose_ij[:2, :2]
@@ -50,7 +50,7 @@ class GaussNewton:
 
         elif gradType == "Lie":
             # linearized residual
-            res = se2_Log(rel_pose)
+            res = se2_Log(err_pose)
 
             Jr_inv = np.linalg.inv(se2_Jacobian_right(res))
 
@@ -99,7 +99,7 @@ class GaussNewton:
         # TODO ill-condition
         # H_sparse = csc_matrix(H)
         # H_cond = onenormest(H_sparse)
-        # if H_cond > 1e+10:
+        # if H_cond > 1e10:
         #     H += 1e-3 * np.eye(n)
 
         H_sparse = csc_matrix(H)
@@ -123,10 +123,9 @@ class GaussNewton:
                 for idx in range(0, len(graph.x), 3):
                     pose_vec = graph.x[idx : idx + 3]
                     dx_vec = dx[idx : idx + 3]
-                    updated_pose = se2_mat_to_vec(
+                    graph.x[idx : idx + 3] = se2_mat_to_vec(
                         se2_vec_to_mat(pose_vec) @ se2_Exp(dx_vec)
                     )
-                    graph.x[idx : idx + 3] = updated_pose
 
             # stopping criteria
             if norm_dx < self.tolerance:

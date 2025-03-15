@@ -76,6 +76,7 @@ def se2_Adjoint(mat):
     return adj
 
 
+# TODO should directly use `Jr_inv` closed-form instead of `np.linalg.inv(Jr)`
 def se2_Jacobian_right(vec):
     """Right Jacobian of Cartesian vector [1, Eq. (163)]."""
     theta = vec[2]
