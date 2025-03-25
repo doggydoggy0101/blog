@@ -6,7 +6,6 @@ Python implementation of 2D pose graph optimization. For more information, pleas
 **Prerequisites**
 ```sh
 pip install numpy scipy matplotlib
-pip install SciencePlots  # optional
 ```
 
 **Run**

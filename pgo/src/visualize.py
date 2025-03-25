@@ -2,13 +2,6 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 
-# fmt: off
-try:
-    import scienceplots
-    plt.style.use(["science", "ieee"])
-except ImportError:
-    pass
-# fmt: on
 
 TITLE_FONTSIZE = 24
 COLOR_LIST = ["#e74c3c", "#3498db", "#3498db"]
@@ -25,6 +18,22 @@ EDGE_KWARG = {
     "linewidth": 1,
     "zorder": 0,
 }
+CUSTOM_CONFIG = {
+    "figure.dpi": 200,
+    "font.family": "serif",
+    "font.serif": "times",
+    "mathtext.fontset": "dejavuserif",
+    "text.usetex": True,
+    "lines.linewidth": 1.0,
+    "axes.linewidth": 0.5,
+    "grid.linewidth": 0.5,
+    "grid.color": "#d6dbdf",
+    "legend.frameon": False,
+    "savefig.bbox": "tight",
+    "savefig.pad_inches": 0.05,
+}
+
+plt.rcParams.update(CUSTOM_CONFIG)
 
 
 def plot_graph(graphs, titles, save_path):
@@ -33,7 +42,7 @@ def plot_graph(graphs, titles, save_path):
     if not isinstance(titles, list):
         titles = [titles]
 
-    fig, ax = plt.subplots(1, len(graphs), figsize=(8 * len(graphs), 6), dpi=160)
+    fig, ax = plt.subplots(1, len(graphs), figsize=(8 * len(graphs), 6))
 
     if len(graphs) == 1:
         ax = [ax]
