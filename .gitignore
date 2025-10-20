@@ -12,3 +12,6 @@ __pycache__/
 
 # macos
 .DS_Store
+
+# develop
+pnp/

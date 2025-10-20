@@ -35,6 +35,9 @@ def se2_Exp(vec):
     else:
         A = np.sin(theta) / theta
         B = (1 - np.cos(theta)) / theta
+        # ! test
+        A = 1.0 - theta_sq / 6.0
+        B = 0.5 * theta - theta * theta_sq / 24.0
 
     V = np.array([[A, -B], [B, A]])
     t = V @ vec[:2]
@@ -58,6 +61,9 @@ def se2_Log(mat):
     else:
         A = np.sin(theta) / theta
         B = (1 - np.cos(theta)) / theta
+        # ! test
+        A = 1.0 - theta_sq / 6.0
+        B = 0.5 * theta - theta * theta_sq / 24.0
 
     det = A * A + B * B
     V_inv = np.array([[A, B], [-B, A]]) / det
