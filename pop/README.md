@@ -1,36 +1,99 @@
 # Polynomial Optimization
 
-```sh
-Example 1
-min  -2x_1^2 - 2x_2^2 + 2x_1x_2 + 2x_1 + 6x_2 - 10
-s.t. -x_1^2 + 2x_1 >= 0
-     -x_1^2 - x_2^2 + 2x_1x_2 + 1 >=0
-     -x_2^2 + 6x_2 - 8 >=0
+We test examples from the paper [Detecting Global Optimality and Extracting Solutions in GloptiPoly](https://homepages.laas.fr/henrion/papers/extract.pdf).
 
-2-th order moment relaxation status: optimal
-Global optimality: True, rank: 3
-Solution 1: [1. 2.]
-Solution 2: [2. 3.]
-Solution 3: [2. 2.]
+### Example in Section 2.3
 
-Example 2
-min 0
-s.t.  x_1^2 + x_2^2 - 1 = 0
-      x_1^3 + 2x_1x_2 + x_1x_2x_3 + x_2^3 - 1 = 0
-      x_3^2 -2 = 0
+$$
+\begin{aligned}
+\min_{x\in\mathbb{R}^2}\ &-(x_1-1)^2-(x_1-x_2)^2-(x_2-3)^2\\
+\text{s.t.}\ &\ 1-(x_1-1)^2\geq0\\
+&\ 1-(x_1-x_2)^2\geq0\\
+&\ 1-(x_2-1)^2\geq0\\
+\end{aligned}
+$$
 
-2-th order moment relaxation status: optimal
-Global optimality: False, rank: 8
+```shell
+[POP] rank diff condition: 1
 
-3-th order moment relaxation status: optimal
-Global optimality: False, rank: 6
+[POP] 2-th order moment relaxation:
+[POP] sdp optimality: True
+[POP] rank(M_1)=3
+[POP] rank(M_2)=3
+[POP] pop optimality: True
 
-4-th order moment relaxation status: optimal
-Global optimality: True, rank: 6
-Solution 1: [ 0.42857159  0.57142841 -0.64761913]
-Solution 2: [-0.27803981 -0.72674834  3.78219867]
-Solution 3: [0.07682401 1.1511649  0.9033483 ]
-Solution 4: [ 0.12674753 -0.61570129 -0.14278444]
-Solution 5: [-0.54740764  1.23863908 -1.61276566]
-Solution 6: [ 1.19330449  0.38121705 -1.28237683]
+value: -2.0
+solution 1: [2. 3.]
+solution 2: [1. 2.]
+solution 3: [2. 2.]
+```
+
+### Example in Section 3.1
+
+$$
+\begin{aligned}
+x_1^2+x_2^2 -1&=0\\
+x_1^3+(2+x_3)x_1x_2+x_2^3 -1&=0\\
+x_3^2-2 &=0
+\end{aligned}
+$$
+
+```shell
+[POP] No objective found, minimize the trace of moment matrix
+[POP] rank diff condition: 2
+
+[POP] 2-th order moment relaxation:
+[POP] sdp optimality: True
+[POP] rank(M_1)=4
+[POP] rank(M_2)=7
+[POP] pop optimality: False
+
+[POP] 3-th order moment relaxation:
+[POP] sdp optimality: True
+[POP] rank(M_1)=2
+[POP] rank(M_2)=2
+[POP] rank(M_3)=2
+[POP] pop optimality: True
+
+value: 24.75
+solution 1: [ 0.7071  0.7071 -1.4142]
+solution 2: [-0.7071 -0.7071  1.4142]
+```
+
+### Example in Section 3.2
+
+$$
+\begin{aligned}
+5x_1^9-6x_1^5x_2 + x_1x_2^4 + 2x_1x_3 &= 0\\
+-2x_1^6x_2 + 2x_1^2x_2^3 + 2x_2x_3 &= 0\\
+x_1^2 + x_2^2 &= 0.265625
+\end{aligned}
+$$
+
+```shell
+[POP] No objective found, minimize the trace of moment matrix
+[POP] rank diff condition: 5
+
+[POP] 5-th order moment relaxation:
+[POP] sdp optimality: True
+[POP] rank(M_1)=3
+[POP] rank(M_2)=4
+[POP] rank(M_3)=4
+[POP] rank(M_4)=4
+[POP] rank(M_5)=4
+[POP] pop optimality: False
+
+[POP] 6-th order moment relaxation:
+[POP] sdp optimality: True
+[POP] rank(M_1)=2
+[POP] rank(M_2)=2
+[POP] rank(M_3)=2
+[POP] rank(M_4)=2
+[POP] rank(M_5)=2
+[POP] rank(M_6)=2
+[POP] pop optimality: True
+
+value: 1.3373
+solution 1: [ 0.2619  0.4439 -0.0132]
+solution 2: [-0.2619  0.4439 -0.0132]
 ```
