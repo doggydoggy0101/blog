@@ -179,10 +179,10 @@ class LasserreHierarchy(Basis):
                 max_deg_h = max(sum(exp) for exp in h_dict.keys())
                 v = max(v, math.ceil(max_deg_h / 2))
 
-        max_deg_f = 0
         if self.f_dict is not None:
             max_deg_f = max(sum(exp) for exp in self.f_dict.keys())
         else:
+            max_deg_f = 0
             if verbose:
                 print("[POP] No objective found, minimize the trace of moment matrix")
         kappa = max(v, max_deg_f)
@@ -252,5 +252,5 @@ if __name__ == "__main__":
     f_dict = {(2,): 1}
     g_dict_list = [{(1,): 1, (0,): -2}]
     model = LasserreHierarchy(n_vars=1, f_dict=f_dict, g_dict_list=g_dict_list)
-    result = model.solve(verbose=True)
+    result = model.solve()
     print(f"val: {result['value']:.1f}, sol: {result['solutions'][0][0]:.1f}")
