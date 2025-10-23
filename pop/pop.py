@@ -119,14 +119,13 @@ class LasserreHierarchy(Basis):
         rank = np.sum(eigvals > 1e-3)
 
         if rank == 1:
-            v = eigvecs[:, -1]
-            v /= v[0]
-            x_opt = np.zeros(self.n_vars)
+            v = M[:, 0]  # first column
+            x = np.zeros(self.n_vars)
             for i in range(self.n_vars):
                 basis_elem = tuple([1 if j == i else 0 for j in range(self.n_vars)])
                 idx = self.basis_kappa.index(basis_elem)
-                x_opt[i] = v[idx]
-            solutions.append(x_opt)
+                x[i] = v[idx]
+            solutions.append(x)
         else:
             # cholesky factor
             sqrt_eigvals = np.sqrt(np.maximum(eigvals, 0))
@@ -253,5 +252,5 @@ if __name__ == "__main__":
     f_dict = {(2,): 1}
     g_dict_list = [{(1,): 1, (0,): -2}]
     model = LasserreHierarchy(n_vars=1, f_dict=f_dict, g_dict_list=g_dict_list)
-    result = model.solve()
+    result = model.solve(verbose=True)
     print(f"val: {result['value']:.1f}, sol: {result['solutions'][0][0]:.1f}")
