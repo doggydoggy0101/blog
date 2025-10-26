@@ -4,10 +4,10 @@ import cvxpy as cp
 from scipy.linalg import schur
 import sympy as sp
 
-from utils import Basis
+from utils import BasisUtils
 
 
-class LasserreHierarchy(Basis):
+class LasserreHierarchy(BasisUtils):
     def __init__(self, n_vars, f_dict=None, g_dict_list=None, h_dict_list=None):
         super().__init__(n_vars)
 
@@ -168,7 +168,7 @@ class LasserreHierarchy(Basis):
 
         return solutions
 
-    def solve(self, verbose=False):
+    def solve(self, max_hierarchy_levels=10, verbose=False):
         v = 0
         if self.g_dict_list is not None:
             for g_dict in self.g_dict_list:
@@ -180,17 +180,16 @@ class LasserreHierarchy(Basis):
                 v = max(v, math.ceil(max_deg_h / 2))
 
         if self.f_dict is not None:
-            max_deg_f = max(sum(exp) for exp in self.f_dict.keys())
+            kappa = max(v, math.ceil(max(sum(exp) for exp in self.f_dict.keys()) / 2))
         else:
-            max_deg_f = 0
+            kappa = v
             if verbose:
                 print("[POP] No objective found, minimize the trace of moment matrix")
-        kappa = max(v, max_deg_f)
 
         if verbose:
             print(f"[POP] rank diff condition: {v}", end="\n\n")
 
-        for i in range(10):  # ! hard code 10 hierarchy levels
+        for i in range(max_hierarchy_levels):
             if verbose:
                 print(f"[POP] {kappa}-th order moment relaxation:")
 

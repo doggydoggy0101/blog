@@ -1,7 +1,7 @@
 from itertools import combinations_with_replacement
 
 
-class Basis:
+class BasisUtils:
     def __init__(self, num_vars):
         self.num_vars = num_vars
 

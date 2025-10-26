@@ -1,8 +1,14 @@
 # Polynomial Optimization
+Python implementation of Lasserre's hierarchy for polynomial optimization problems. For more information, please refer to my blog: [Lasserre Hierarchy](https://dgbshien.com/docs/blogs/lasserre-hierarchy.pdf).
+
+**Prerequisites**
+```sh
+pip install numpy scipy sympy "cvxpy[mosek]"
+```
 
 We test examples from the paper [Detecting Global Optimality and Extracting Solutions in GloptiPoly](https://homepages.laas.fr/henrion/papers/extract.pdf).
 
-### Example in Section 2.3
+**Example in Section 2.3**
 
 $$
 \begin{aligned}
@@ -28,7 +34,7 @@ solution 2: [1. 2.]
 solution 3: [2. 2.]
 ```
 
-### Example in Section 3.1
+**Example in Section 3.1**
 
 $$
 \begin{aligned}
@@ -60,7 +66,7 @@ solution 1: [ 0.7071  0.7071 -1.4142]
 solution 2: [-0.7071 -0.7071  1.4142]
 ```
 
-### Example in Section 3.2
+**Example in Section 3.2**
 
 $$
 \begin{aligned}
