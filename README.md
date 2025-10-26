@@ -1,7 +1,5 @@
 # Blogs
-Sample code of my blogs. I write blogs mainly about *Optimization* and *Robotics*. Feel free to check them out, and I hope you find them helpful!
-
-- [dgbshien.com](https://dgbshien.com/)
+Sample code of my [blogs](https://dgbshien.com/), mainly about *Optimization* and *Robotics*.
 
 ### :camera: Optimization
 | Blog | Code |
